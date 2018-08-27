@@ -1,0 +1,59 @@
+		SAS 2017 CHALLENGE : INDOOR LOCALIZATION USING INERTIAL SENSORS COMMONLY AVAILABLE IN ANDROID DEVICES
+				
+
+Authors:
+	NINAD INGALE (nis3177)
+	KARTEEK PRADYUMNA BULUSU (kb1304)
+
+
+Challange Description
+-----------
+The projct aims to implement a reliable algorithm to predict the cordinates at the next instance of user holding the android 
+device.
+
+This algorithm has been implemented to cater an indoor localization challange arranged by IEEE Sensor Applications Symposium 
+(http://2016.sensorapps.org/localization-challenge). 
+
+More details about the challange and the dataset are available at https://github.com/IndoorLocalization/datasets. 
+
+
+Code Description: 
+-----------
+We have divided the implementation into two separate programming units as preprocessing and prediction steps. In the preprocessing 
+step we have done operations on the data and we have created some new features like magnitude of acceleration, rotation angles for 
+X-axis, Y-axis around Z-axis, also we have created the step length at each instance.This code has been included in the 
+preprocessingFile.java code unit. 
+
+In the next module which is responsible for predicting the next steps taken by the user, the programming module is again divided into 
+the methods for reading the preprocessed data, calculating the angles of rotation and then implementing the prediction formula specified 
+in step 3 of the algorithm for kalman filter. In this module we have used the JAMA libraries for the sake of ease for multiplication 
+with the rotational matrices.  
+
+
+User guide
+----------
+Step 1 : Creating the Preprocessed file.  
+
+	In order to create the preprocessed file which will be then fed to the kalman filter code unit , execute the preprocessingFile.java
+	code unit. I  order to succesfully execute this , we need to be sure of following 
+
+	1.The input file is present at the directory mentioned in the program.
+	2.We need to have read/write permissions to the location where we want to write the preprocessing step output file. 
+	3.We need to make sure we have enough space to write the output file.    	
+	
+	Output of this step is the preprocessed file being present at the location mentioned in the program.  
+
+Step 2 : Predicting the Next step of the user. 
+	
+	This code segment has to be executed after the preprocessingFile.java module.The preprocessed file created in Step 1 needs to be consumed 
+	by this step in order to predict the location of the user at the next instance. In order to execute this code segment succesfully , we need 
+	to make sure of following 
+	
+	1.The preprocessed file is present at the directory mentioned in the program.	 	
+	2.We need to have external jars imported for Jfreechart for plotting of the values and JAMA libraries for matrix operations.
+	3.We need to have read/write permissions to the location where we want to write the preprocessing step output file.   
+
+	Output of this step is the graphs being created for the actual values from sensors and the predicted values given by the kalman filter. Also we 
+	have the output (predicted values ax,ay,tau) which is the position of the person in the next instance in a 2 dimensional real world coordinates 
+	(ax,ay) and the heading direction (tau) with respect to the earth's magnetic field and the rotation provided by the gyroscope readings written at 
+	the console.  
